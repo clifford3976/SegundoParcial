@@ -75,6 +75,7 @@
   <ItemGroup>
     <Content Include="Consultas\Cuentas.aspx" />
     <Content Include="Consultas\Depositos.aspx" />
+    <Content Include="Consultas\Prestamos.aspx" />
     <Content Include="content\toastr.css" />
     <Content Include="content\toastr.min.css" />
     <Content Include="Default.aspx" />
@@ -85,6 +86,7 @@
     <Content Include="Imagenes\SAG.png" />
     <Content Include="Registros\Cuentas.aspx" />
     <Content Include="Registros\Depositos.aspx" />
+    <Content Include="Registros\Prestamos.aspx" />
     <Content Include="Scripts\jquery-1.6.3.js" />
     <Content Include="Scripts\jquery-1.6.3.min.js" />
     <Content Include="Scripts\toastr.js" />
@@ -106,6 +108,13 @@
     </Compile>
     <Compile Include="Consultas\Depositos.aspx.designer.cs">
       <DependentUpon>Depositos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Consultas\Prestamos.aspx.cs">
+      <DependentUpon>Prestamos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Consultas\Prestamos.aspx.designer.cs">
+      <DependentUpon>Prestamos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -131,6 +140,13 @@
     </Compile>
     <Compile Include="Registros\Depositos.aspx.designer.cs">
       <DependentUpon>Depositos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registros\Prestamos.aspx.cs">
+      <DependentUpon>Prestamos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registros\Prestamos.aspx.designer.cs">
+      <DependentUpon>Prestamos.aspx</DependentUpon>
     </Compile>
     <Compile Include="SiteMaster.Master.cs">
       <DependentUpon>SiteMaster.Master</DependentUpon>

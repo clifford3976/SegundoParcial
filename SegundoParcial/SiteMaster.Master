@@ -21,6 +21,11 @@
 
 </head>
 <body>
+
+     <script src="Scripts/jquery-3.3.1.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+
     <form id="form1" runat="server">
         <div>
 
@@ -62,7 +67,7 @@
                     <div class="dropdown-menu bg-success">
                         <a class="dropdown-item" href="http://localhost:57528/Registros/Cuentas.aspx#">Registro de Cuentas</a>
                         <a class="dropdown-item" href="http://localhost:57528/Registros/Depositos.aspx#">Registro de Depositos</a>
-                        <a class="dropdown-item" href="">Registro de Prestamos</a>
+                        <a class="dropdown-item" href="http://localhost:57528/Registros/Prestamos.aspx#">Registro de Prestamos</a>
                     </div>
                 </li>
 
@@ -72,6 +77,8 @@
                     <div class="dropdown-menu bg-success ">
                         <a class="dropdown-item" href="http://localhost:57528/Consultas/Cuentas.aspx#">Consulta Cuentas</a>
                         <a class="dropdown-item" href="http://localhost:57528/Consultas/Depositos.aspx#">Consulta Depositos</a>
+                        <a class="dropdown-item" href="http://localhost:57528/Consultas/Prestamos.aspx#">Consulta Prestamos</a>
+                 
                     </div>
                 </li>
 
