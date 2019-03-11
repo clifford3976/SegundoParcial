@@ -14,14 +14,14 @@
             <div style="width: 220px">
 
                 <asp:DropDownList class="form-control" ID="TipodeFiltro" runat="server" for="TipodeFiltro" Width="200px">
-                     <asp:ListItem>PrestamoId</asp:ListItem>
+                    <asp:ListItem>PrestamoId</asp:ListItem>
                     <asp:ListItem>Fecha</asp:ListItem>
                     <asp:ListItem>Interes</asp:ListItem>
                     <asp:ListItem>Capital</asp:ListItem>
                     <asp:ListItem>Tiempo</asp:ListItem>
 
                 </asp:DropDownList>
-                   
+
 
                 </>
             </div>
@@ -84,8 +84,13 @@
                     </Columns>
                     <HeaderStyle BackColor="red" Font-Bold="True" />
                 </asp:GridView>
+
+                <asp:Button ID="ReporteButton" runat="server" class="btn btn-success" Text="Imprimir" OnClick="ReporteButton_Click" />
+
             </div>
         </div>
     </div>
 
+
 </asp:Content>
+

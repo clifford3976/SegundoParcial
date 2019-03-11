@@ -58,8 +58,9 @@ namespace BLL
 
         public override bool Eliminar(int id)
         {
+
             var prestamo = Buscar(id);
-            Cuenta cuenta = prestamo.Cuenta;
+            Cuenta cuenta = contexto.Cuenta.Find(prestamo.CuentaId);
             cuenta.Balance -= prestamo.Capital;
             contexto.Entry(cuenta).State = EntityState.Modified;
 

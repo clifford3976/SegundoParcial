@@ -111,6 +111,9 @@
     <Content Include="Registros\Cuentas.aspx" />
     <Content Include="Registros\Depositos.aspx" />
     <Content Include="Registros\Prestamos.aspx" />
+    <Content Include="Reportes\ReporteCuenta.aspx" />
+    <Content Include="Reportes\ReporteDeposito.aspx" />
+    <Content Include="Reportes\ReportePrestamo.aspx" />
     <Content Include="Scripts\jquery-1.6.3.js" />
     <Content Include="Scripts\jquery-1.6.3.min.js" />
     <Content Include="Scripts\toastr.js" />
@@ -185,6 +188,42 @@
     <Compile Include="Registros\Prestamos.aspx.designer.cs">
       <DependentUpon>Prestamos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\ReporteCuenta.aspx.cs">
+      <DependentUpon>ReporteCuenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteCuenta.aspx.designer.cs">
+      <DependentUpon>ReporteCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ReporteDeposito.aspx.cs">
+      <DependentUpon>ReporteDeposito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteDeposito.aspx.designer.cs">
+      <DependentUpon>ReporteDeposito.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ReportePrestamo.aspx.cs">
+      <DependentUpon>ReportePrestamo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReportePrestamo.aspx.designer.cs">
+      <DependentUpon>ReportePrestamo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SegundoParcialDb1DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SegundoParcialDb1DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SegundoParcialDb2DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SegundoParcialDb2DataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SegundoParcialDbDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SegundoParcialDbDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="SiteMaster.Master.cs">
       <DependentUpon>SiteMaster.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -197,6 +236,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="SegundoParcialDbDataSet.xsc">
+      <DependentUpon>SegundoParcialDbDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="SegundoParcialDb1DataSet.xsc">
+      <DependentUpon>SegundoParcialDb1DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="SegundoParcialDb1DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SegundoParcialDb1DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="SegundoParcialDb1DataSet.xss">
+      <DependentUpon>SegundoParcialDb1DataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="SegundoParcialDb2DataSet.xsc">
+      <DependentUpon>SegundoParcialDb2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="SegundoParcialDb2DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SegundoParcialDb2DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="SegundoParcialDb2DataSet.xss">
+      <DependentUpon>SegundoParcialDb2DataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="SegundoParcialDbDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>SegundoParcialDbDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="SegundoParcialDbDataSet.xss">
+      <DependentUpon>SegundoParcialDbDataSet.xsd</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -207,7 +279,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Reportes\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
@@ -218,6 +289,11 @@
       <Project>{66b7b8c9-0eea-4fc1-94f1-dc939276dbab}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reportes\CuentaReporte.rdlc" />
+    <EmbeddedResource Include="Reportes\DepositoReporte.rdlc" />
+    <EmbeddedResource Include="Reportes\PrestamoReporte.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

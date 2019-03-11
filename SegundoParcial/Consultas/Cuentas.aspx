@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true" 
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true"
     CodeBehind="Cuentas.aspx.cs" Inherits="SegundoParcial.Consultas.Cuentas" %>
 
 
@@ -7,7 +7,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <div class="container form-group ">
+    <div class="container form-group ">
         <div class="row">
 
             <label for="TipodeFiltro" style="width: 50px">Filtro:</label>
@@ -16,8 +16,8 @@
                     <asp:ListItem>CuentaID</asp:ListItem>
                     <asp:ListItem>Fecha</asp:ListItem>
                     <asp:ListItem>Nombre</asp:ListItem>
-                     <asp:ListItem>Balance</asp:ListItem>
-                    
+                    <asp:ListItem>Balance</asp:ListItem>
+
 
                 </asp:DropDownList>
             </div>
@@ -35,12 +35,12 @@
         <table>
             <tr>
                 <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        </td>
+                </td>
                 <td>
                     <asp:TextBox ID="DesdeTextBox" TextMode="Date" runat="server" class="form-control" Height="25" Width="175"></asp:TextBox>
                 </td>
                 <td>&nbsp<strong><asp:Label ID="Label1" runat="server" Text="-"> Desde </asp:Label></strong>&nbsp
-                        </td>
+                </td>
                 <td>
                     <asp:TextBox ID="HastaTextBox" TextMode="Date" runat="server" class="form-control" Height="25" Width="175">Hasta</asp:TextBox>
                 </td>
@@ -48,16 +48,16 @@
         </table>
     </div>
 
-    
+
     <div>
         <table>
             <tr>
                 <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                        </td>
+                </td>
                 <td>
                     <asp:CheckBox ID="FechaCheckBox" runat="server" />
                 </td>
-                
+
             </tr>
         </table>
     </div>
@@ -72,14 +72,18 @@
                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                         <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                         <asp:BoundField DataField="Balance" HeaderText="Balance" />
-                        
+
 
 
                     </Columns>
                     <HeaderStyle BackColor="red" Font-Bold="True" />
                 </asp:GridView>
+
+                <asp:Button ID="ReporteButton" runat="server" class="btn btn-success" Text="Imprimir" OnClick="ReporteButton_Click" />
+
             </div>
         </div>
     </div>
+
 
 </asp:Content>

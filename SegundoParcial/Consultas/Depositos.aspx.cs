@@ -121,6 +121,11 @@ namespace SegundoParcial.Consultas
 
 
         }
+
+        protected void ReporteButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("../Reportes/ReporteDeposito.aspx");
+        }
     }
     
 }

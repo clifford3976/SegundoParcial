@@ -7,13 +7,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class=" panel panel-primary">
-        <div class="panel-heading text-center">
-            <h1><ins>Registro de Prestamos</ins></h1>
-            <br />
-        </div>
-    </div>
-
+  
     <div class="col-sm-12">
 
         <div class="Container-fluid">

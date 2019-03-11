@@ -17,7 +17,7 @@ namespace Entities
         public decimal Capital { get; set; }
         public decimal Interes { get; set; }
         public int Tiempo { get; set; }
-        public virtual Cuenta Cuenta { get; set; }
+        public virtual Prestamo Cuenta { get; set; }
         public virtual List<CuotaDetalle> Detalle { get; set; }
 
         public Prestamo()

@@ -13,7 +13,7 @@ namespace SegundoParcial.Registros
     public partial class Prestamos : System.Web.UI.Page
     {
 
-        RepositorioBase<Cuenta> repositorioBase = new RepositorioBase<Cuenta>();
+        RepositorioBase<Prestamo> repositorioBase = new RepositorioBase<Prestamo>();
         RepositorioPrestamo repositorioPrestamo = new RepositorioPrestamo();
         List<CuotaDetalle> Detalle = new List<CuotaDetalle>();
 
@@ -77,7 +77,7 @@ namespace SegundoParcial.Registros
 
         private void LlenaComboCuentaID()
         {
-            RepositorioBase<Cuenta> cuentas = new RepositorioBase<Cuenta>();
+            RepositorioBase<Prestamo> cuentas = new RepositorioBase<Prestamo>();
             CuentaDropDownList.Items.Clear();
             CuentaDropDownList.DataSource = cuentas.GetList(x => true);
             CuentaDropDownList.DataValueField = "CuentaID";
@@ -99,7 +99,7 @@ namespace SegundoParcial.Registros
             RepositorioPrestamo repositorio = new RepositorioPrestamo();
             Prestamo prestamo = LlenaClase();
 
-            RepositorioBase<Cuenta> cuentas = new RepositorioBase<Cuenta>();
+            RepositorioBase<Prestamo> cuentas = new RepositorioBase<Prestamo>();
 
             var validar = cuentas.Buscar(Utilities.Utils.ToInt(CuentaDropDownList.SelectedValue));
 
