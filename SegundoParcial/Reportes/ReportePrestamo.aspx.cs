@@ -18,15 +18,20 @@ namespace SegundoParcial.Reportes
         Expression<Func<Prestamo, bool>> filtro = C => true;
         protected void Page_Load(object sender, EventArgs e)
         {
-            PrestamoReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-            PrestamoReportViewer.Reset();
+            if (!IsPostBack)
+            {
+                PrestamoReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+                PrestamoReportViewer.Reset();
 
-            PrestamoReportViewer.LocalReport.ReportPath = Server.MapPath(@"../Reportes/PrestamoReporte.rdlc");
+                PrestamoReportViewer.LocalReport.ReportPath = Server.MapPath(@"../Reportes/PrestamoReporte.rdlc");
 
-            PrestamoReportViewer.LocalReport.DataSources.Clear();
+                PrestamoReportViewer.LocalReport.DataSources.Clear();
 
-            PrestamoReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Prestamos", repositorio.GetList(filtro)));
-            PrestamoReportViewer.LocalReport.Refresh();
+                PrestamoReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Prestamos", repositorio.GetList(c=>true)));
+                PrestamoReportViewer.LocalReport.Refresh();
+
+            }
+         
         }
     }
 }

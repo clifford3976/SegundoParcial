@@ -18,15 +18,19 @@ namespace SegundoParcial.Reportes
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            DepositoReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-            DepositoReportViewer.Reset();
+            if(!IsPostBack)
+            {
+                DepositoReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+                DepositoReportViewer.Reset();
 
-            DepositoReportViewer.LocalReport.ReportPath = Server.MapPath(@"../Reportes/DepositoReporte.rdlc");
+                DepositoReportViewer.LocalReport.ReportPath = Server.MapPath(@"../Reportes/DepositoReporte.rdlc");
 
-            DepositoReportViewer.LocalReport.DataSources.Clear();
+                DepositoReportViewer.LocalReport.DataSources.Clear();
 
-            DepositoReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Depositos", repositorio.GetList(filtro)));
-            DepositoReportViewer.LocalReport.Refresh();
+                DepositoReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Depositos", repositorio.GetList(c=>true)));
+                DepositoReportViewer.LocalReport.Refresh();
+            }
+            
         }
     }
 }

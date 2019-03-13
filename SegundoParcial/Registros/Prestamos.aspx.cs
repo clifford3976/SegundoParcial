@@ -24,6 +24,8 @@ namespace SegundoParcial.Registros
                 LlenaComboCuentaID();
                 FechadateTime.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 PrestamoIDTextbox.Text = "0";
+
+                
             }
         }
 
@@ -46,7 +48,7 @@ namespace SegundoParcial.Registros
             prestamo.Interes = Utilities.Utils.ToDecimal(InteresesTextBox.Text);
             prestamo.Tiempo = Utilities.Utils.ToInt(TiempoTextBox.Text);
             prestamo.Detalle = (List<CuotaDetalle>)ViewState["Cuota"];
-
+            
             return prestamo;
         }
 
@@ -77,7 +79,7 @@ namespace SegundoParcial.Registros
 
         private void LlenaComboCuentaID()
         {
-            RepositorioBase<Prestamo> cuentas = new RepositorioBase<Prestamo>();
+            RepositorioBase<Cuenta> cuentas = new RepositorioBase<Cuenta>();
             CuentaDropDownList.Items.Clear();
             CuentaDropDownList.DataSource = cuentas.GetList(x => true);
             CuentaDropDownList.DataValueField = "CuentaID";

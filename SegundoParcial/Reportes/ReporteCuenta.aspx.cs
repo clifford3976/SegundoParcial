@@ -18,15 +18,20 @@ namespace SegundoParcial.Reportes
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            CuentaReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
-            CuentaReportViewer.Reset();
+            if(!IsPostBack)
+            {
+                CuentaReportViewer.ProcessingMode = Microsoft.Reporting.WebForms.ProcessingMode.Local;
+                CuentaReportViewer.Reset();
 
-            CuentaReportViewer.LocalReport.ReportPath = Server.MapPath(@"../Reportes/CuentaReporte.rdlc");
+                CuentaReportViewer.LocalReport.ReportPath = Server.MapPath(@"../Reportes/CuentaReporte.rdlc");
 
-            CuentaReportViewer.LocalReport.DataSources.Clear();
+                CuentaReportViewer.LocalReport.DataSources.Clear();
 
-            CuentaReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Cuentas", repositorio.GetList(filtro)));
-            CuentaReportViewer.LocalReport.Refresh();
+                CuentaReportViewer.LocalReport.DataSources.Add(new ReportDataSource("Cuentas", repositorio.GetList(c=>true)));
+                CuentaReportViewer.LocalReport.Refresh();
+            }
+
+            
         }
     }
 }
