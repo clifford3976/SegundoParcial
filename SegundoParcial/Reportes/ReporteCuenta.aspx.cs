@@ -13,8 +13,8 @@ namespace SegundoParcial.Reportes
 {
     public partial class ReporteCuenta : System.Web.UI.Page
     {
-        RepositorioBase<Cuenta> repositorio = new RepositorioBase<Cuenta>();
-        Expression<Func<Cuenta, bool>> filtro = C => true;
+        RepositorioBase<Cuentas> repositorio = new RepositorioBase<Cuentas>();
+        Expression<Func<Cuentas, bool>> filtro = C => true;
 
         protected void Page_Load(object sender, EventArgs e)
         {

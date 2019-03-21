@@ -11,74 +11,22 @@ namespace BLL
 {
     public class RepositorioBase<T> : IDisposable, IRepository<T> where T : class
     {
-        internal Contexto contexto;
+        internal Contexto _contexto;
 
         public RepositorioBase()
         {
-            contexto = new Contexto();
-        }
-
-        public virtual T Buscar(int id)
-        {
-            T entity;
-            try
-            {
-                entity = contexto.Set<T>().Find(id);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return entity;
-        }
-
-        public virtual bool Eliminar(int id)
-        {
-            bool paso = false;
-            try
-            {
-                T entity = contexto.Set<T>().Find(id);
-                contexto.Set<T>().Remove(entity);
-
-                if (contexto.SaveChanges() > 0)
-                {
-                    paso = true;
-                }
-
-                contexto.Dispose();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return paso;
-        }
-
-        public virtual List<T> GetList(Expression<Func<T, bool>> expression)
-        {
-            List<T> lista = new List<T>();
-            try
-            {
-                lista = contexto.Set<T>().Where(expression).ToList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return lista;
+            _contexto = new Contexto();
         }
 
         public virtual bool Guardar(T entity)
         {
             bool paso = false;
+
             try
             {
-                if (contexto.Set<T>().Add(entity) != null)
+                if (_contexto.Set<T>().Add(entity) != null)
                 {
-                    contexto.SaveChanges();
+                    _contexto.SaveChanges(); //Guardar los cambios
                     paso = true;
                 }
             }
@@ -86,17 +34,17 @@ namespace BLL
             {
                 throw;
             }
-
             return paso;
         }
+
 
         public virtual bool Modificar(T entity)
         {
             bool paso = false;
             try
             {
-                contexto.Entry(entity).State = EntityState.Modified;
-                if (contexto.SaveChanges() > 0)
+                _contexto.Entry(entity).State = EntityState.Modified;
+                if (_contexto.SaveChanges() > 0)
                 {
                     paso = true;
                 }
@@ -105,13 +53,61 @@ namespace BLL
             {
                 throw;
             }
-
             return paso;
+        }
+
+
+        public virtual bool Eliminar(int id)
+        {
+            bool paso = false;
+            try
+            {
+                T entity = _contexto.Set<T>().Find(id);
+                _contexto.Set<T>().Remove(entity);
+
+                if (_contexto.SaveChanges() > 0)
+                    paso = true;
+
+                _contexto.Dispose();
+            }
+            catch (Exception)
+            { throw; }
+            return paso;
+        }
+
+
+        public virtual T Buscar(int id)
+        {
+            T entity;
+            try
+            {
+                entity = _contexto.Set<T>().Find(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return entity;
+        }
+
+
+        public List<T> GetList(Expression<Func<T, bool>> expression)
+        {
+            List<T> Lista = new List<T>();
+            try
+            {
+                Lista = _contexto.Set<T>().Where(expression).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Lista;
         }
 
         public void Dispose()
         {
-            contexto.Dispose();
+            _contexto.Dispose();
         }
     }
 }

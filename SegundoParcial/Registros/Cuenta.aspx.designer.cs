@@ -10,7 +10,7 @@
 namespace SegundoParcial.Registros {
     
     
-    public partial class Cuentas {
+    public partial class Cuenta {
         
         /// <summary>
         /// Label1 control.

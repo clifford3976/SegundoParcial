@@ -11,10 +11,10 @@ namespace DAL
     public class Contexto : DbContext
     {
 
-        public DbSet<Cuenta> Cuenta { get; set; }
+        public DbSet<Cuentas> Cuenta { get; set; }
         public DbSet<Deposito> Depositos { get; set; }
-        public DbSet<Prestamo> Prestamos { get; set; }
-        public DbSet<CuotaDetalle> Detalle { get; set; }
+        public DbSet<Prestamo> Prestamo { get; set; }
+        public DbSet<Cuotas> Cuotas { get; set; }
 
 
         public Contexto() : base("ConStr")

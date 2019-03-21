@@ -48,8 +48,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cuenta.cs" />
-    <Compile Include="CuotaDetalle.cs" />
+    <Compile Include="Cuentas.cs" />
+    <Compile Include="Cuotas.cs" />
     <Compile Include="Deposito.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Prestamo.cs" />

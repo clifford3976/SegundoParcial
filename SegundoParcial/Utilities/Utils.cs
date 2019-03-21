@@ -23,15 +23,6 @@ namespace SegundoParcial.Utilities
 
             return retorno;
         }
-
-        public static DateTime ToDateTime(string valor)
-        {
-            DateTime retorno = DateTime.Now;
-            DateTime.TryParse(valor, out retorno);
-
-            return retorno;
-        }
-
         public static void ShowToastr(this Page page, string message, string title, string type = "info")
         {
             page.ClientScript.RegisterStartupScript(page.GetType(), "toastr_message",

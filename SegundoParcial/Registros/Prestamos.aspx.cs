@@ -3,7 +3,6 @@ using Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -12,10 +11,14 @@ namespace SegundoParcial.Registros
 {
     public partial class Prestamos : System.Web.UI.Page
     {
-
-        RepositorioBase<Prestamo> repositorioBase = new RepositorioBase<Prestamo>();
-        RepositorioPrestamo repositorioPrestamo = new RepositorioPrestamo();
-        List<CuotaDetalle> Detalle = new List<CuotaDetalle>();
+        decimal interes = 0;
+        decimal Capital = 0;
+        decimal MontoApagar = 0;
+        decimal Balance = 0;
+        decimal tiempo = 0;
+        decimal interesporciento = 0;
+        DateTime Fecha;
+        Decimal MontoCuota = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -24,44 +27,22 @@ namespace SegundoParcial.Registros
                 LlenaComboCuentaID();
                 FechadateTime.Text = DateTime.Now.ToString("yyyy-MM-dd");
                 PrestamoIDTextbox.Text = "0";
-
-                
             }
         }
 
-        private Prestamo LlenaClase()
+        public Prestamo LlenaClase()
         {
             Prestamo prestamo = new Prestamo();
-            int id;
-            bool result = int.TryParse(PrestamoIDTextbox.Text, out id);
-            if (result == true)
-            {
-                prestamo.PrestamoId = id;
-            }
-            else
-            {
-                prestamo.PrestamoId = 0;
-            }
-
-            prestamo.CuentaId = Utilities.Utils.ToInt(CuentaDropDownList.SelectedValue);
+            prestamo.PrestamoID = Utilities.Utils.ToInt(PrestamoIDTextbox.Text);
+            prestamo.CuentaID = Utilities.Utils.ToInt(CuentaDropDownList.SelectedValue);
             prestamo.Capital = Utilities.Utils.ToDecimal(CapitalTexbox.Text);
+            prestamo.Fecha = Convert.ToDateTime(FechadateTime.Text);
             prestamo.Interes = Utilities.Utils.ToDecimal(InteresesTextBox.Text);
             prestamo.Tiempo = Utilities.Utils.ToInt(TiempoTextBox.Text);
-            prestamo.Detalle = (List<CuotaDetalle>)ViewState["Cuota"];
-            
-            return prestamo;
-        }
+            prestamo.TotalAPagar = Utilities.Utils.ToInt(TotalTextBox.Text);
+            prestamo.Detalle = (List<Cuotas>)ViewState["Cuota"];
 
-        private void LlenaCampos(Prestamo prestamo)
-        {
-            Limpiar();
-            PrestamoIDTextbox.Text = prestamo.PrestamoId.ToString();
-            LlenaComboCuentaID();
-            CapitalTexbox.Text = prestamo.Capital.ToString();
-            InteresesTextBox.Text = prestamo.Interes.ToString();
-            TiempoTextBox.Text = prestamo.Tiempo.ToString();
-            CuotasGridView.DataSource = prestamo.Detalle;
-            CuotasGridView.DataBind();
+            return prestamo;
         }
 
         private void Limpiar()
@@ -71,6 +52,7 @@ namespace SegundoParcial.Registros
             CapitalTexbox.Text = string.Empty;
             InteresesTextBox.Text = string.Empty;
             TiempoTextBox.Text = string.Empty;
+            TotalTextBox.Text = string.Empty;
             CuotasGridView.DataSource = null;
             CuotasGridView.DataBind();
             LlenaComboCuentaID();
@@ -79,12 +61,57 @@ namespace SegundoParcial.Registros
 
         private void LlenaComboCuentaID()
         {
-            RepositorioBase<Cuenta> cuentas = new RepositorioBase<Cuenta>();
+            RepositorioBase<Cuentas> cuentas = new RepositorioBase<Cuentas>();
             CuentaDropDownList.Items.Clear();
             CuentaDropDownList.DataSource = cuentas.GetList(x => true);
             CuentaDropDownList.DataValueField = "CuentaID";
             CuentaDropDownList.DataTextField = "Nombre";
             CuentaDropDownList.DataBind();
+        }
+
+        private void LlenaCampos(Prestamo prestamo)
+        {
+            Limpiar();
+            PrestamoIDTextbox.Text = prestamo.PrestamoID.ToString();
+            LlenaComboCuentaID();
+            CapitalTexbox.Text = prestamo.Capital.ToString();
+            InteresesTextBox.Text = prestamo.Interes.ToString();
+            TiempoTextBox.Text = prestamo.Tiempo.ToString();
+            TotalTextBox.Text = prestamo.TotalAPagar.ToString();
+            CuotasGridView.DataSource = prestamo.Detalle;
+            CuotasGridView.DataBind();
+
+        }
+
+        public List<Cuotas> CalculodeCuotas()
+        {
+            List<Cuotas> cuotas = new List<Cuotas>();
+            Prestamo prestamo = new Prestamo();
+            interesporciento = Utilities.Utils.ToDecimal(InteresesTextBox.Text);
+            Capital = Utilities.Utils.ToDecimal(CapitalTexbox.Text);
+            MontoApagar = Capital + (Capital * interesporciento);
+            tiempo = Utilities.Utils.ToDecimal(TiempoTextBox.Text);
+            interes = Capital * interesporciento / tiempo;
+            Fecha = DateTime.Now;
+            Capital = Capital / tiempo;
+            MontoCuota = MontoApagar / tiempo;
+            Balance = MontoApagar;
+
+
+            for (int i = 0; i < tiempo; i++)
+            {
+                Balance -= MontoCuota;
+
+
+                if (i == 0)
+                {
+                    cuotas.Add(new Cuotas(0, i + 1, 0, Fecha, Math.Round(MontoCuota, 2), Math.Round(interes, 2), Math.Round(Capital, 2), Math.Round(Balance, 2)));
+                }
+                else
+                    cuotas.Add(new Cuotas(0, i + 1, 0, Fecha.AddMonths(i), Math.Round(MontoCuota, 2), Math.Round(interes, 2), Math.Round(Capital, 2), Math.Round(Balance, 2)));
+
+            }
+            return cuotas;
         }
 
         protected void NuevoButton_Click(object sender, EventArgs e)
@@ -97,11 +124,17 @@ namespace SegundoParcial.Registros
             if (Convert.ToInt32(CuentaDropDownList.SelectedValue) == 0)
                 return;
 
+            if (CuotasGridView.Rows.Count == 0)
+            {
+                Utilities.Utils.ShowToastr(this, "No se encuentra el ID", "Error", "error");
+                return;
+            }
 
-            RepositorioPrestamo repositorio = new RepositorioPrestamo();
+
+            PrestamoBLL repositorio = new PrestamoBLL();
             Prestamo prestamo = LlenaClase();
 
-            RepositorioBase<Prestamo> cuentas = new RepositorioBase<Prestamo>();
+            RepositorioBase<Cuentas> cuentas = new RepositorioBase<Cuentas>();
 
             var validar = cuentas.Buscar(Utilities.Utils.ToInt(CuentaDropDownList.SelectedValue));
 
@@ -113,7 +146,7 @@ namespace SegundoParcial.Registros
 
                 if (Page.IsValid)
                 {
-                    if (PrestamoIDTextbox.Text == "0")
+                    if (prestamo.PrestamoID == 0)
                     {
                         paso = repositorio.Guardar(prestamo);
 
@@ -128,7 +161,7 @@ namespace SegundoParcial.Registros
                         }
                         else
                         {
-                            Utilities.Utils.ShowToastr(this, "No se encuentra el ID", "Fallo", "success");
+                            Utilities.Utils.ShowToastr(this, "No se encuentra el ID", "Error", "error");
                             return;
                         }
                     }
@@ -136,17 +169,16 @@ namespace SegundoParcial.Registros
                     if (paso)
 
                     {
-                        Utilities.Utils.ShowToastr(this, "Registro Con Exito", "Exito", "success");
+                        Utilities.Utils.ShowToastr(this, "Cuenta Registrada", "Exito", "Exito");
 
                     }
 
                     else
 
                     {
-                        Utilities.Utils.ShowToastr(this, "No se pudo Guardar", "Fallo", "success");
+                        Utilities.Utils.ShowToastr(this, "No se pudo Guardar", "Error", "error");
                     }
                     Limpiar();
-
                     return;
                 }
 
@@ -154,17 +186,16 @@ namespace SegundoParcial.Registros
             }
             else
             {
-                Utilities.Utils.ShowToastr(this, "El numero de cuenta no existe", "Fallo", "success");
+                Utilities.Utils.ShowToastr(this, "El numero de cuenta no existe", "Error", "Error");
                 return;
 
 
             }
-
         }
 
         protected void EliminarButton_Click(object sender, EventArgs e)
         {
-            RepositorioPrestamo repositorio = new RepositorioPrestamo();
+            PrestamoBLL repositorio = new PrestamoBLL();
             RepositorioBase<Prestamo> dep = new RepositorioBase<Prestamo>();
 
 
@@ -174,18 +205,35 @@ namespace SegundoParcial.Registros
 
             if (depositos == null)
             {
-                Utilities.Utils.ShowToastr(this, "El deposito no existe", "Fallo", "success");
+                Utilities.Utils.ShowToastr(this, "El Prestamo no existe", "Error", "error");
             }
 
             else
             {
                 repositorio.Eliminar(id);
 
-
-
-                Utilities.Utils.ShowToastr(this, "Elimino Correctamente", "Exito", "success");
+                Utilities.Utils.ShowToastr(this, "Elimino Correctamente", "Exito", "Exito");
                 Limpiar();
             }
+        }
+
+        protected void CalcularButton_Click(object sender, EventArgs e)
+        {
+            int id;
+            if (Convert.ToInt32(CuentaDropDownList.SelectedValue) != 0)
+                id = Convert.ToInt32(CuentaDropDownList.SelectedValue);
+
+
+            if (Convert.ToInt32(CuentaDropDownList.SelectedValue) != 0)
+            {
+                ViewState["Cuota"] = CalculodeCuotas();
+            }
+
+
+            CuotasGridView.DataSource = ViewState["Cuota"];
+            CuotasGridView.DataBind();
+
+            TotalTextBox.Text = MontoApagar.ToString();
 
         }
 
@@ -201,51 +249,12 @@ namespace SegundoParcial.Registros
             {
                 LlenaCampos(prestamo);
 
-                Utilities.Utils.ShowToastr(this, "Se ha Encontrado su deposito", "Exito", "success");
+                Utilities.Utils.ShowToastr(this, "Se ha Encontrado su deposito", "Exito", "Exito");
             }
             else
             {
-                Utilities.Utils.ShowToastr(this, "el ID registrado no existe", "Fallido", "success");
+                Utilities.Utils.ShowToastr(this, "el ID registrado no existe", "Error", "error");
             }
         }
-
-        protected void CalcularButton_Click(object sender, EventArgs e)
-        {
-            int acu = 1;
-            double Capital = double.Parse(CapitalTexbox.Text);
-            double Interes = double.Parse(InteresesTextBox.Text) / 1200;
-            double Tiempo = double.Parse(TiempoTextBox.Text);
-
-            double Cuota = Capital * (Interes / (double)(1 - Math.Pow(1 + (double)Interes, -Tiempo)));
-            double InteresMensual = 0, AmTotal = 0, Am = 0;
-            Expression<Func<Prestamo, bool>> filtro = x => true;
-
-            for (int i = 0; i < Tiempo; ++i)
-            {
-                CuotaDetalle Detalle1 = new CuotaDetalle();
-                InteresMensual = Math.Round((Interes * Capital), 2);
-                Capital = Math.Round(Capital - Cuota + InteresMensual, 2);
-
-                AmTotal += Math.Round(Cuota - InteresMensual, 2);
-                Am = Cuota - InteresMensual;
-                Detalle1.PrestamoId = repositorioPrestamo.GetList(filtro).Count + 1;
-                Detalle1.Valor = Math.Round((decimal)Cuota, 2);
-                Detalle1.Capital = Math.Round((decimal)Am, 2);
-                Detalle1.Interes = Math.Round((decimal)InteresMensual, 2);
-                if (i == Tiempo - 1)
-                {
-                    decimal Aux = Math.Round((decimal)Capital, MidpointRounding.AwayFromZero);
-                    if (Aux == 0)
-                        Detalle1.Balance = (decimal)0.00;
-                }
-                else
-                    Detalle1.Balance = Math.Round((decimal)Capital, 2);
-                Detalle.Add(Detalle1);
-                //repositorioPrestamo.Guardar(prestamo);
-                ++acu;
-            }
-            CuotasGridView.DataSource = Detalle;
-            CuotasGridView.DataBind();
-        }
     }
-    }
+}

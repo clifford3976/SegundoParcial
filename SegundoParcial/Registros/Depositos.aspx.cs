@@ -85,7 +85,7 @@ namespace SegundoParcial.Registros
 
         private void LlenaComboCuentaID()
         {
-            RepositorioBase<Cuenta> cuentas = new RepositorioBase<Cuenta>();
+            RepositorioBase<Cuentas> cuentas = new RepositorioBase<Cuentas>();
             DropDownList.Items.Clear();
             DropDownList.Items.Add(condicion);
             DropDownList.DataSource = cuentas.GetList(x => true);
@@ -107,7 +107,7 @@ namespace SegundoParcial.Registros
 
             DepositoBLL repositorio = new DepositoBLL();
             Deposito depositos = LlenaClase();
-            RepositorioBase<Cuenta> cuentas = new RepositorioBase<Cuenta>();
+            RepositorioBase<Cuentas> cuentas = new RepositorioBase<Cuentas>();
 
             var validar = cuentas.Buscar(Utilities.Utils.ToInt(DropDownList.SelectedValue));
 
@@ -208,7 +208,7 @@ namespace SegundoParcial.Registros
             }
             else
             {
-                Utilities.Utils.ShowToastr(this, "el ID registrado no existe", "Fallido", "success");
+                Utilities.Utils.ShowToastr(this, "el ID registrado no existe", "Fallido", "danger");
             }
         }
     }

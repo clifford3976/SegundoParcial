@@ -49,13 +49,13 @@
                <!-- Barra de Navegacion -->
                <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
             <!-- Brand -->
-            <a class="navbar-brand" href="http://localhost:57528/Default.aspx#">
+            <a class="navbar-brand" href="/Default.aspx#">
                 <asp:Image ID="Image1" runat="server" Height="40px" ImageUrl="~/Imagenes/SAG.png" Width="60px" /></a>
 
             <!-- Links -->
             <ul class="navbar-nav" style="width:400px">
                 <li class="nav-item">
-                    <a class="nav-link" href=" http://localhost:57528/Default.aspx#">Inicio</a>
+                    <a class="nav-link" href="/Default.aspx#">Inicio</a>
 
 
 
@@ -65,9 +65,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="Registros" data-toggle="dropdown">Registros
                     </a>
                     <div class="dropdown-menu bg-success">
-                        <a class="dropdown-item" href="http://localhost:57528/Registros/Cuentas.aspx#">Registro de Cuentas</a>
-                        <a class="dropdown-item" href="http://localhost:57528/Registros/Depositos.aspx#">Registro de Depositos</a>
-                        <a class="dropdown-item" href="http://localhost:57528/Registros/Prestamos.aspx#">Registro de Prestamos</a>
+                        <a class="dropdown-item" href="/Registros/Cuenta.aspx">Registro de Cuentas</a>
+                        <a class="dropdown-item" href="/Registros/Depositos.aspx">Registro de Depositos</a>
+                        <a class="dropdown-item" href="/Registros/Prestamos.aspx">Registro de Prestamos</a>
                     </div>
                 </li>
 
@@ -75,9 +75,9 @@
                     <a class="nav-link dropdown-toggle"  href="#" id="Consultas" data-toggle="dropdown">Consultas
                     </a>
                     <div class="dropdown-menu bg-success ">
-                        <a class="dropdown-item" href="http://localhost:57528/Consultas/Cuentas.aspx#">Consulta Cuentas</a>
-                        <a class="dropdown-item" href="http://localhost:57528/Consultas/Depositos.aspx#">Consulta Depositos</a>
-                        <a class="dropdown-item" href="http://localhost:57528/Consultas/Prestamos.aspx#">Consulta Prestamos</a>
+                        <a class="dropdown-item" href="/Consultas/Cuentas.aspx">Consulta Cuentas</a>
+                        <a class="dropdown-item" href="/Consultas/Depositos.aspx">Consulta Depositos</a>
+                        <a class="dropdown-item" href="/Consultas/Prestamos.aspx">Consulta Prestamos</a>
                  
                     </div>
                 </li>

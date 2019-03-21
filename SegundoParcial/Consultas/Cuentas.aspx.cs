@@ -25,8 +25,8 @@ namespace SegundoParcial.Consultas
         protected void ButtonBuscar_Click1(object sender, EventArgs e)
         {
             CuentaGridView.DataBind();
-            Expression<Func<Cuenta, bool>> filtro = x => true;
-            RepositorioBase<Cuenta> repositorio = new RepositorioBase<Cuenta>();
+            Expression<Func<Entities.Cuentas, bool>> filtro = x => true;
+            RepositorioBase<Entities.Cuentas> repositorio = new RepositorioBase<Entities.Cuentas>();
 
             int id;
 

@@ -1,29 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true"
     CodeBehind="Prestamos.aspx.cs" Inherits="SegundoParcial.Consultas.Prestamos" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
+
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="container form-group ">
         <div class="row">
 
-
             <label for="TipodeFiltro" style="width: 50px">Filtro:</label>
             <div style="width: 220px">
-
                 <asp:DropDownList class="form-control" ID="TipodeFiltro" runat="server" for="TipodeFiltro" Width="200px">
-                    <asp:ListItem>PrestamoId</asp:ListItem>
-                    <asp:ListItem>Fecha</asp:ListItem>
+                    <asp:ListItem>PrestamoID</asp:ListItem>
+                    <asp:ListItem>CuentaID</asp:ListItem>
                     <asp:ListItem>Interes</asp:ListItem>
-                    <asp:ListItem>Capital</asp:ListItem>
                     <asp:ListItem>Tiempo</asp:ListItem>
+                    <asp:ListItem>capital</asp:ListItem>
+                    <asp:ListItem>Todos</asp:ListItem>
+
 
                 </asp:DropDownList>
-
-
-                </>
             </div>
             <asp:Label ID="LabelCriterio" runat="server" Text="Criterio:" Style="width: 60px"></asp:Label>
             <div style="width: 370px">
@@ -59,7 +58,7 @@
                 <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 </td>
                 <td>
-                    <asp:CheckBox ID="FechaCheckBox" runat="server" />
+                    <asp:CheckBox ID="FechaCheckBox" runat="server" Text="Fecha" />
                 </td>
 
             </tr>
@@ -72,25 +71,29 @@
                 <asp:GridView ID="PrestamoGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="false" CellPadding="4" ForeColor="#333333" GridLines="None">
                     <AlternatingRowStyle BackColor="LightSkyBlue" />
                     <Columns>
-
-                        <asp:BoundField DataField="PrestamoId" HeaderText="PrestamoId" />
+                        <asp:BoundField DataField="PrestamoID" HeaderText="PrestamoID" />
                         <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                        <asp:BoundField DataField="CuentaID" HeaderText="CuentaID" />
                         <asp:BoundField DataField="Interes" HeaderText="Interes" />
-                        <asp:BoundField DataField="Capital" HeaderText="Capital" />
                         <asp:BoundField DataField="Tiempo" HeaderText="Tiempo" />
-
-
+                        <asp:BoundField DataField="Capital" HeaderText="Capital" />
+                        <asp:BoundField DataField="TotalAPagar" HeaderText="Total a pagar" />
 
                     </Columns>
-                    <HeaderStyle BackColor="red" Font-Bold="True" />
+                    <HeaderStyle BackColor="LightCyan" Font-Bold="True" />
                 </asp:GridView>
 
-                <asp:Button ID="ReporteButton" runat="server" class="btn btn-success" Text="Imprimir" OnClick="ReporteButton_Click" />
 
             </div>
         </div>
     </div>
 
+    <div class="panel-footer">
+        <div class="modal-content">
+            <div class="text-center">
+            </div>
+        </div>
+    </div>
 
+    <asp:Button ID="ReporteButton" runat="server" class="btn btn-success" Text="Imprimir" OnClick="ReporteButton_Click" />
 </asp:Content>
-

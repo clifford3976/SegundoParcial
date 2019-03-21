@@ -106,9 +106,11 @@
     <Content Include="Global.asax" />
     <Content Include="content\toastr.scss" />
     <Content Include="content\toastr.less" />
+    <None Include="Properties\PublishProfiles\ControlBancario - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\ControlBancario - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Imagenes\SAG.png" />
-    <Content Include="Registros\Cuentas.aspx" />
+    <Content Include="Registros\Cuenta.aspx" />
     <Content Include="Registros\Depositos.aspx" />
     <Content Include="Registros\Prestamos.aspx" />
     <Content Include="Reportes\ReporteCuenta.aspx" />
@@ -167,12 +169,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registros\Cuentas.aspx.cs">
-      <DependentUpon>Cuentas.aspx</DependentUpon>
+    <Compile Include="Registros\Cuenta.aspx.cs">
+      <DependentUpon>Cuenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registros\Cuentas.aspx.designer.cs">
-      <DependentUpon>Cuentas.aspx</DependentUpon>
+    <Compile Include="Registros\Cuenta.aspx.designer.cs">
+      <DependentUpon>Cuenta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Registros\Depositos.aspx.cs">
       <DependentUpon>Depositos.aspx</DependentUpon>
@@ -291,9 +293,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reportes\CuentaReporte.rdlc" />
-    <EmbeddedResource Include="Reportes\DepositoReporte.rdlc" />
-    <EmbeddedResource Include="Reportes\PrestamoReporte.rdlc" />
+    <Content Include="Reportes\CuentaReporte.rdlc" />
+    <Content Include="Reportes\DepositoReporte.rdlc" />
+    <Content Include="Reportes\PrestamoReporte.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

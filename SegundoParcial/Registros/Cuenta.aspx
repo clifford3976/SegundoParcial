@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true" 
-    CodeBehind="Cuentas.aspx.cs" Inherits="SegundoParcial.Registros.Cuentas" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteMaster.Master" AutoEventWireup="true"
+    CodeBehind="Cuenta.aspx.cs" Inherits="SegundoParcial.Registros.Cuenta" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -8,7 +8,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="form-group container">
+   
         <div class="row">
             <div class="col-sm-4">
 
